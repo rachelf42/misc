@@ -18,6 +18,12 @@ function vbox_guest_additions {
 	umount /mnt
 }
 
+function do_ssh_keys {
+	wget -O /home/rachel/.ssh/authorized_keys https://github.com/rachelf42.keys
+ 	chown rachel:rachel /home/rachel/.ssh/authorized_keys
+ 	wget -O /root/.ssh/authorized_keys https://github.com/rachelf42.keys
+}
+
 chmod -x /etc/update-motd.d/10-help-text
 chmod -x /etc/update-motd.d/50-motd-news
 
@@ -40,7 +46,7 @@ apt update
 
 yes_or_no "Do we need to set timezone?" && dpkg-reconfigure tzdata
 
-yes_or_no "Do we need to download SSH keys?" && wget -O /home/rachel/.ssh/authorized_keys https://github.com/rachelf42.keys
+yes_or_no "Do we need to download SSH keys?" && do_ssh_keys
 
 yes_or_no "Do we need VBox Guest Additions? (if yes insert disk before proceeding)" && vbox_guest_additions
 

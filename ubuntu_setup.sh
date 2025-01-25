@@ -46,6 +46,8 @@ yes_or_no "Do we need VBox Guest Additions? (if yes insert disk before proceedin
 
 yes_or_no "Do we need QEmu Guest Agent?"  && apt install qemu-guest-agent
 
+yes_or_no "Are we on the internal home network? If yes, do we want the APT proxy?" && echo 'Acquire::http::Proxy "http://10.0.0.4:3142";' >> /etc/apt/apt.conf.d/00-rachel-proxy
+
 echo 'Doing upgrades'
 sleep 3
 apt -y upgrade

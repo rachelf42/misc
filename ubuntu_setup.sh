@@ -24,6 +24,8 @@ function do_ssh_keys {
  	wget -O /root/.ssh/authorized_keys https://github.com/rachelf42.keys
 }
 
+yes_or_no "Do we need to install the non-root user?" && adduser rachel
+
 chmod -x /etc/update-motd.d/10-help-text
 chmod -x /etc/update-motd.d/50-motd-news
 
@@ -50,14 +52,13 @@ yes_or_no "Do we need to download SSH keys?" && do_ssh_keys
 
 yes_or_no "Do we need VBox Guest Additions? (if yes insert disk before proceeding)" && vbox_guest_additions
 
-yes_or_no "Do we need QEmu Guest Agent?"  && apt install qemu-guest-agent
+yes_or_no "Do we need QEmu Guest Agent?"  && apt install -y qemu-guest-agent
 
-yes_or_no "Are we on the internal home network? If yes, do we want the APT proxy?" && echo 'Acquire::http::Proxy "http://10.0.0.4:3142";' >> /etc/apt/apt.conf.d/00-rachel-proxy
+yes_or_no "Are we on the internal home network? If yes, do we want the APT proxy?" && echo 'Acquire::http::Proxy "http://192.168.0.5:3142";' >> /etc/apt/apt.conf.d/00-rachel-proxy
 
 echo 'Doing upgrades'
 sleep 3
 apt -y upgrade
 
-echo 'Finished! Rebooting unless ^C recieved in 10 seconds'
-sleep 10
-reboot
+echo 'Finished! Rebooting...'
+poweroff --reboot 3

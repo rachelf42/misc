@@ -24,7 +24,16 @@ function do_ssh_keys {
  	wget -O /root/.ssh/authorized_keys https://github.com/rachelf42.keys
 }
 
-yes_or_no "Do we need to install the non-root user?" && apt install -y sudo && adduser rachel && usermod -aG sudo rachel
+function make_user {
+	apt install -y sudo
+ 	adduser rachel
+  	usermod -aG sudo rachel
+   	mkdir /home/rachel/.ssh
+    	chown rachel:rachel /home/rachel/.ssh
+     	chmod 700 /home/rachel/.ssh
+}
+
+yes_or_no "Do we need to install the non-root user?" && make_user
 
 chmod -x /etc/update-motd.d/10-help-text
 chmod -x /etc/update-motd.d/50-motd-news

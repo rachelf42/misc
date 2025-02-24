@@ -66,6 +66,12 @@ yes_or_no "Do we need VBox Guest Additions? (if yes insert disk before proceedin
 
 yes_or_no "Do we need QEmu Guest Agent?"  && apt install -y qemu-guest-agent
 
+yes_or_no "Fuck snapd?" && apt-mark hold snapd && tee /etc/apt/preferences.d/00-fuck-snapd <<EOD
+Package: snapd
+Pin: release *
+Pin-Priority: -1
+EOD
+
 echo 'Doing upgrades'
 sleep 10
 apt-get -y upgrade

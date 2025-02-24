@@ -11,7 +11,7 @@ function yes_or_no {
 }
 
 function vbox_guest_additions {
-        apt install gcc make perl bzip2 tar
+        apt-get install gcc make perl bzip2 tar
 	umount /mnt
 	mount /dev/cdrom /mnt
 	bash /mnt/VBoxLinuxAdditions.run
@@ -25,13 +25,15 @@ function do_ssh_keys {
 }
 
 function make_user {
-	apt install -y sudo
+	apt-get install -y sudo
  	adduser rachel
   	usermod -aG sudo rachel
    	mkdir /home/rachel/.ssh
     	chown rachel:rachel /home/rachel/.ssh
      	chmod 700 /home/rachel/.ssh
 }
+
+apt-get update
 
 yes_or_no "Do we need to install the non-root user?" && make_user
 
@@ -56,8 +58,6 @@ echo 'set tabsize 4' >> /etc/skel/.nanorc
 echo 'set tabstospaces' >> /etc/skel/.nanorc
 echo 'set autoindent' >> /etc/skel/.nanorc
 
-apt update
-
 yes_or_no "Do we need to set timezone?" && dpkg-reconfigure tzdata
 
 yes_or_no "Do we need to download SSH keys?" && do_ssh_keys
@@ -66,18 +66,9 @@ yes_or_no "Do we need VBox Guest Additions? (if yes insert disk before proceedin
 
 yes_or_no "Do we need QEmu Guest Agent?"  && apt install -y qemu-guest-agent
 
-yes_or_no "Are we on the internal home network? If yes, do we want the APT proxy?" && echo 'Acquire::http::Proxy "http://192.168.0.5:3142";' >> /etc/apt/apt.conf.d/00-rachel-proxy
-
-ANS=$(yes_or_no "Copy SSH private key from main PC? (internal)")
-if [ $ANS = 0 ]; then
-	scp "rachel@192.168.1.1:~/.ssh/id*" /home/rachel/.ssh/
-else
-	yes_or_no "Copy SSH private key from main PC? (external)" && scp -J "rachel@rachelf42.ca" "rachel@192.168.1.1:~/.ssh/id*" /home/rachel/.ssh/
-fi
-
 echo 'Doing upgrades'
 sleep 30
-apt -y upgrade
+apt-get -y upgrade
 
 echo 'Finished! Rebooting...'
 poweroff --reboot 3

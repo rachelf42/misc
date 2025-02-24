@@ -67,7 +67,7 @@ yes_or_no "Do we need VBox Guest Additions? (if yes insert disk before proceedin
 yes_or_no "Do we need QEmu Guest Agent?"  && apt install -y qemu-guest-agent
 
 echo 'Doing upgrades'
-sleep 30
+sleep 10
 apt-get -y upgrade
 
 echo 'Finished! Rebooting...'

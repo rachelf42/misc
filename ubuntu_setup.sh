@@ -85,4 +85,4 @@ sleep 10
 apt-get -y upgrade
 
 echo 'Finished! Rebooting...'
-poweroff --reboot 3
+shutdown --reboot +3

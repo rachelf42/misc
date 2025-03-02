@@ -41,19 +41,25 @@ chmod -x /etc/update-motd.d/10-help-text
 chmod -x /etc/update-motd.d/50-motd-news
 
 echo 'force_color_prompt=yes' >> /home/rachel/.bashrc
-echo 'export PS1=\'[$?] \[\e[32m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\]:\[\e[35m\]\w\[\e[m\] \\$> \'' >> /home/rachel/.bashrc
+cat <<'EOD' >> /home/rachel/.bashrc
+export PS1='[$?] \[\e[32m\]\u\[\e[m\]\[\e[32m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\]:\[\e[35m\]\w\[\e[m\] \\$> '
+EOD
 echo 'set tabsize 4' >> /home/rachel/.nanorc
 echo 'set tabstospaces' >> /home/rachel/.nanorc
 echo 'set autoindent' >> /home/rachel/.nanorc
 
 echo 'force_color_prompt=yes' >> /root/.bashrc
-echo 'export PS1=\'[$?] \[\e[31m\]\u\[\e[m\]\[\e[31m\]@\[\e[m\]\[\e[31m\]\h\[\e[m\]:\[\e[35m\]\w\[\e[m\] \\$> \'' >> /root/.bashrc
+cat <<'EOD' >> /root/.bashrc
+export PS1='[$?] \[\e[31m\]\u\[\e[m\]\[\e[31m\]@\[\e[m\]\[\e[31m\]\h\[\e[m\]:\[\e[35m\]\w\[\e[m\] \\$> '
+EOD
 echo 'set tabsize 4' >> /root/.nanorc
 echo 'set tabstospaces' >> /root/.nanorc
 echo 'set autoindent' >> /root/.nanorc
 
 echo 'force_color_prompt=yes' >> /etc/skel/.bashrc
-echo 'export PS1=\'[$?] \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\]:\[\e[35m\]\w\[\e[m\] \\$> \'' >> /etc/skel/.bashrc
+cat <<'EOD' >> /etc/skel/.bashrc
+export PS1=\'[$?] \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\]:\[\e[35m\]\w\[\e[m\] \\$> '
+EOD
 echo 'set tabsize 4' >> /etc/skel/.nanorc
 echo 'set tabstospaces' >> /etc/skel/.nanorc
 echo 'set autoindent' >> /etc/skel/.nanorc

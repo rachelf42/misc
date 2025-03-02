@@ -58,7 +58,7 @@ echo 'set tabsize 4' >> /etc/skel/.nanorc
 echo 'set tabstospaces' >> /etc/skel/.nanorc
 echo 'set autoindent' >> /etc/skel/.nanorc
 
-yes_or_no "Do we need trash-cli? (is this a headless server)" && apt -y install trash-cli && echo "alias rm='trash'" >> /home/rachel/.bashrc
+yes_or_no "Do we need trash-cli? (is this a headless server)" && apt -y install trash-cli && echo "alias rm='echo \"use trash, dummy\"; false'" >> /home/rachel/.bashrc
 
 yes_or_no "Do we need to set timezone?" && dpkg-reconfigure tzdata
 

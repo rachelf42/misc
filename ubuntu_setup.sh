@@ -1,15 +1,5 @@
 #!/bin/bash
 
-function yes_or_no {
-    while true; do
-        read -p "$* [y/n]: " yn
-        case $yn in
-            [Yy]*) echo "Got YES"; return 0  ;;  
-            [Nn]*) echo "Got NO" ; return 1 ;;
-        esac
-    done
-}
-
 apt-get update
 
 if id "rachel" >/dev/null 2>&1; then
@@ -56,6 +46,9 @@ EOD
 echo "$NANORC" >> /etc/skel/.nanorc
 
 if dpkg -l gedit >/dev/null 2>&1; then
+    echo "assuming desktop mode"
+else
+    echo "assuming server mode"
     apt -y install trash-cli && echo "alias rm='echo \"use trash, dummy\"; tput bel; false'" >> /home/rachel/.bashrc
 fi
 printf 'America\nVancouver\n' | dpkg-reconfigure -f teletype tzdata > /dev/null 2>&1

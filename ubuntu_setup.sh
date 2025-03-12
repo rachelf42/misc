@@ -25,6 +25,7 @@ cat /home/rachel/.ssh/authorized_keys > /root/.ssh/authorized_keys
 
 chmod -x /etc/update-motd.d/10-help-text
 chmod -x /etc/update-motd.d/50-motd-news
+echo "AcceptEnv PSSH_NODENUM PSSH_NUMNODES PSSH_HOST" > /etc/ssh/sshd_config.d/99-rachelf42.conf
 
 cat <<'EOD' >> /home/rachel/.bashrc
 force_color_prompt=yes

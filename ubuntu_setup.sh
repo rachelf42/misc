@@ -54,7 +54,7 @@ if dpkg -l gedit >/dev/null 2>&1; then
     echo "assuming desktop mode"
 else
     echo "assuming server mode"
-    apt -y install trash-cli && echo "alias rm='echo \"use trash, dummy\"; tput bel; false'" >> /home/rachel/.bashrc
+    apt-get -y install trash-cli && echo "alias rm='echo \"use trash, dummy\"; tput bel; false'" >> /home/rachel/.bashrc
 fi
 printf 'America\nVancouver\n' | dpkg-reconfigure -f teletype tzdata > /dev/null 2>&1
 

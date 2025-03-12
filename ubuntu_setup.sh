@@ -1,8 +1,7 @@
 #!/bin/bash
 
 echo 'If QEMU Agent / VBox Guest Additions are needed this script will not do it for you.'
-echo 'Current (feb2025) Proxmox templates include QGA already'
-echo 'Otherwise remember to do that after reboot (or ^C and do it now)'
+echo 'Remember to do that after reboot (or ^C and do it now)'
 sleep 5
 
 apt-get update

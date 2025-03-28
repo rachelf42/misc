@@ -58,9 +58,7 @@ else
 fi
 printf 'America\nVancouver\n' | dpkg-reconfigure -f teletype tzdata > /dev/null 2>&1
 
-#purge is dangerous, let user abort
-#terraform can just pipe yes
-apt purge snapd && apt-mark hold snapd && tee /etc/apt/preferences.d/00-fuck-snapd <<EOD
+apt-get -y purge snapd && apt-mark hold snapd && tee /etc/apt/preferences.d/00-fuck-snapd <<EOD
 Package: snapd
 Pin: release *
 Pin-Priority: -1
